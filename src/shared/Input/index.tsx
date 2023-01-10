@@ -1,33 +1,19 @@
-import { forwardRef, ForwardRefRenderFunction, useState } from 'react'
+import { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes, useState } from 'react'
 import { IconType } from 'react-icons'
-import { GrClose } from 'react-icons/gr'
-import { BiErrorCircle, BiCopy, BiUser, BiMailSend } from 'react-icons/bi'
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLock } from 'react-icons/ai'
+import { Icon } from '../../assets'
 
-const Icon = {
-  User: BiUser,
-  Mail: BiMailSend,
-  EyeOpen: AiOutlineEye,
-  EyeClose: AiOutlineEyeInvisible,
-  Error: BiErrorCircle,
-  Copy: BiCopy,
-  Lock: AiOutlineLock,
-  Close: GrClose
-}
-
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  type?: 'text' | 'email' | 'password'
   label: string
   name: string
   LeftIcon?: IconType
   RightIcon?: IconType
   error?: string
-  type?: 'text' | 'email' | 'password'
 }
 
-const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, name, LeftIcon, RightIcon, error, type = 'text' },
-  ref
-) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props, ref) => {
+  const { label, name, LeftIcon, RightIcon, error, type = 'text', ...rest } = props
+
   const [value, setValue] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
@@ -81,6 +67,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             ref={ref}
+            {...rest}
           />
 
           {!!RightIcon && (
@@ -102,7 +89,9 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
             flex absolute cursor-text -translate-y-[2rem] transition
             ${LeftIcon && 'ml-[1.915rem]'}
             ${!LeftIcon && 'ml-2'}
-            ${isFilled || isFocused ? `text-sky-500 -translate-y-[4rem] ${LeftIcon && '-translate-x-[1.45rem]'}` : 'text-stone-400'}
+            ${isFilled || isFocused
+              ? `text-sky-500 -translate-y-[4rem] ${LeftIcon && '-translate-x-[1.45rem]'}`
+              : 'text-stone-400'}
             ${error && 'text-red-600'}
           `}
         >
@@ -122,17 +111,4 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   )
 }
 
-const Input = forwardRef(InputBase)
-
-export function Form () {
-  return (
-    <div className='w-60 pt-4'>
-      <form>
-        <Input
-          name='password'
-          label='Password'
-        />
-      </form>
-    </div>
-  )
-}
+export const Input = forwardRef(InputBase)
