@@ -1,23 +1,15 @@
 import { Icon } from '../assets'
-import { Button } from '../shared/Button'
 import { Input } from '../shared/Input'
+import { Select } from '../shared/Select'
 
 export default function Home () {
   return (
     <div className='bg-gray-900 h-screen flex justify-center pt-4'>
-      <div className='w-60 pt-4'>
+      <div className='w-80 pt-4'>
         <form className='flex flex-col gap-6'>
           <Input
-            name='name'
-            label='Name'
-            LeftIcon={Icon.User}
-            // error='Custom error message'
-          />
-
-          <Input
-            type='email'
-            name='email'
-            label='Email'
+            name='username'
+            label='Username'
             LeftIcon={Icon.Mail}
             // error='Custom error message'
           />
@@ -31,7 +23,13 @@ export default function Home () {
             // error='Custom error message'
           />
 
-          <Button name='Create' />
+          <Select
+            label='Select User'
+            labelSecondary='User'
+            LeftIcon={Icon.User}
+            // maxCharacters={10}
+            // error='Custom error message'
+          />
         </form>
       </div>
     </div>

@@ -40,8 +40,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props
               `}
             >
               <LeftIcon
+                size={20}
                 className={`
-                  w-5
                   ${isFocused || isFilled ? 'fill-sky-500' : 'fill-stone-400'}
                   ${error && 'fill-red-600'}
                 `}
@@ -78,7 +78,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props
                 ${error && 'border-red-600'}
               `}
             >
-              <RightIcon className='w-5 fill-stone-400' />
+              <RightIcon size={20} className='fill-stone-400' />
             </div>
           )}
         </div>
@@ -101,7 +101,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props
 
       {!!error &&
         <div className='flex items-center gap-1'>
-          <Icon.Error className='text-sm fill-red-600' />
+          <Icon.Error size={15} className='fill-red-600' />
 
           <label htmlFor={name} className='text-xs text-red-600'>
             {error}
