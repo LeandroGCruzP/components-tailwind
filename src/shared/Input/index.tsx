@@ -5,14 +5,14 @@ import { Icon } from '../../assets'
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'text' | 'email' | 'password'
   label: string
-  name: string
+  idName: string
   LeftIcon?: IconType
   RightIcon?: IconType
   error?: string
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props, ref) => {
-  const { label, name, LeftIcon, RightIcon, error, type = 'text', ...rest } = props
+  const { label, idName, LeftIcon, RightIcon, error, type = 'text', ...rest } = props
 
   const [value, setValue] = useState('')
   const [isFocused, setIsFocused] = useState(false)
@@ -50,8 +50,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props
           )}
 
           <input
-            id={name}
-            name={name}
+            id={idName}
+            name={idName}
             type={type}
             autoComplete='off'
             className={`
@@ -84,7 +84,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props
         </div>
 
         <label
-          htmlFor={name}
+          htmlFor={idName}
           className={`
             flex absolute cursor-text -translate-y-[2rem] transition
             ${LeftIcon && 'ml-[1.915rem]'}
@@ -103,7 +103,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (props
         <div className='flex items-center gap-1'>
           <Icon.Error size={15} className='fill-red-600' />
 
-          <label htmlFor={name} className='text-xs text-red-600'>
+          <label htmlFor={idName} className='text-xs text-red-600'>
             {error}
           </label>
         </div>}

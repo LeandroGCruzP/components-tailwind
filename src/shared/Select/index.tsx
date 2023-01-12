@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { forwardRef, ForwardRefRenderFunction, useMemo, useRef, useState } from 'react'
 import { IconType } from 'react-icons'
 import { Icon } from '../../assets'
 
@@ -23,7 +23,9 @@ interface SelectProps {
   maxCharacters?: number
 }
 
-export function Select ({ label, labelSecondary, error, LeftIcon, maxCharacters = 25 }: SelectProps) {
+const SelectBase: ForwardRefRenderFunction<HTMLLIElement, SelectProps> = (props, ref) => {
+  const { label, labelSecondary, LeftIcon, error, maxCharacters = 25 } = props
+
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
   const [inputSearch, setInputSearch] = useState('')
@@ -176,6 +178,7 @@ export function Select ({ label, labelSecondary, error, LeftIcon, maxCharacters 
                 setInputSearch('')
               }
             }}
+            ref={ref}
           >
             {user.name}
           </li>
@@ -193,3 +196,5 @@ export function Select ({ label, labelSecondary, error, LeftIcon, maxCharacters 
     </div>
   )
 }
+
+export const Select = forwardRef(SelectBase)
