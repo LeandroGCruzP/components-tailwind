@@ -10,7 +10,7 @@ export default function Home () {
           <Input
             name='username'
             label='Username'
-            LeftIcon={Icon.Mail}
+            LeftIcon={Icon.User}
             // error='Custom error message'
           />
 
@@ -26,7 +26,7 @@ export default function Home () {
           <Select
             label='Select User'
             labelSecondary='User'
-            LeftIcon={Icon.User}
+            LeftIcon={Icon.Mail}
             // maxCharacters={10}
             // error='Custom error message'
           />
